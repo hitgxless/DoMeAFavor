@@ -5,13 +5,12 @@
         .config(function ($routeProvider) {
             $routeProvider
                 .when("/", {
-                    templateUrl: "views/home/home.view.html"
+                    templateUrl: "views/home/home.view.html",
+                    controller: "HomeController"
                 })
                 .when("/favor", {
-                    templateUrl: "views/favor/favor.view.html"
-                })
-                .when("/edit", {
-                    templateUrl: "views/edit/edit.view.html"
+                    templateUrl: "views/home/favor.view.html",
+                    controller: "FavorController"
                 })
                 .when("/profile", {
                     templateUrl: "views/profile/profile.view.html"

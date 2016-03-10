@@ -21,6 +21,10 @@ nav {
     display: block;
     background-color: #a73939;
 }
+.navbar li:focus {
+    display: block;
+    background-color: #a73939;
+}
 
 /*-----------------content ----------------------*/
 .contentWrapper {
@@ -64,6 +68,33 @@ nav {
 .noPadding {
     padding: 0;
 }
+.newPostTitle {
+    margin-top: 15px;
+    margin-bottom: 22px;
+}
+
+.deleteText:hover {
+    text-decoration: underline;
+}
+.cancelBtn {
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #c03939;
+    border-radius: 2px;
+    color: #c03939;
+    background-color: white;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.cancelBtn:focus {
+    color: #c03939;
+    outline: none;
+}
+.cancelBtn:hover, .cancelBtn:active {
+    color: white;
+    background-color: #c03939;
+}
+
 /*-----------------login/register ----------------------*/
 .editArea {
     border: 1px solid #c2c2c2;
@@ -159,8 +190,7 @@ input.form-control, textarea.form-control {
     color: white;
     background-color: #c03939;
 }
-.tagBtn:active {
-}
+
 .clickedBtn {
     color: white;
     background-color: #c03939;
@@ -173,4 +203,14 @@ input.form-control, textarea.form-control {
 .text-align-left {
     text-align: left;
 }
+.text-align-right {
+    text-align: right;
+}
+.text-grey {
+    color: #777777;
+}
+.text-normal {
+    color: black;
+}
+
 
