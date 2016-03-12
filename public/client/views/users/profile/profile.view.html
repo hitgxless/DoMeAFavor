@@ -1,4 +1,79 @@
 <div class="container contentWrapper">
+
+    <!-- testing -->
+    <div class="row primaryContent">
+        <div class="col-xs-12 noPadding">
+
+            <h3>Entities</h3>
+            <ul class="nav nav-tabs">
+                <li><a href="#/profile">Users</a></li>
+                <li><a href="#/">Favors</a></li>
+                <li><a href="#/favor">Reports</a></li>
+                <li><a href="#/favor">Comments</a></li>
+                <li><a href="#/friend">Friends</a></li>
+                <li><a href="#/community">Community</a></li>
+            </ul>
+            <br/><br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>_id</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>dob</th>
+                        <th>city</th>
+                        <th>phone</th>
+                        <th>email</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input ng-model="user.username" class="form-control" type="text"></td>
+                        <td><input ng-model="user.password" class="form-control" type="password"></td>
+                        <td><input ng-model="user.firstName" class="form-control" type="text"></td>
+                        <td><input ng-model="user.lastName" class="form-control" type="text"></td>
+                        <td>
+                            <div class="form-group date">
+                                <div date-picker class="input-group input-append date datePicker" id="inputDOB">
+                                    <input ng-model="user.dob" type="text" class="form-control" name="date">
+                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><input ng-model="user.city" class="form-control" type="text"></td>
+                        <td><input ng-model="user.phone" class="form-control" type="tel"></td>
+                        <td><input ng-model="user.email" class="form-control" type="email"></td>
+                        <td><button ng-click="createUser()">Add</button></td>
+                        <td><button ng-click="updateUser()">Update</button></td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>{{user._id}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.password}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.dob}}</td>
+                        <td>{{user.city}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td><button ng-click="editUser($index)">Edit</button></td>
+                        <td><button ng-click="deleteUser($index, user._id)">Del</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- testing -->
+
     <div class="row primaryContent">
         <div class="col-xs-12">
             <div class="row">

@@ -1,0 +1,108 @@
+<div class="container contentWrapper">
+
+    <!-- testing -->
+    <div class="row primaryContent">
+        <div class="col-xs-12 noPadding">
+
+            <h3>Entities</h3>
+            <ul class="nav nav-tabs">
+                <li><a href="#/profile">Users</a></li>
+                <li><a href="#/">Favors</a></li>
+                <li><a href="#/favor">Reports</a></li>
+                <li><a href="#/favor">Comments</a></li>
+                <li class="active"><a href="#/friend">Friends</a></li>
+                <li><a href="#/community">Community</a></li>
+            </ul>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>All users</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>{{user.username}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br/>
+            <div class="form-group">
+                <label class="control-label">Select a user to display his/her friends:</label>
+                <select ng-model="user" ng-change="showFriends(user._id)" ng-options="user.username for user in users" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Input username to add as friend:</label>
+                <input ng-model="friendUsername" class="form-control" type="text"><br/>
+                <button ng-click="addFriend(friendUsername)" class="btn btn-primary">Add as friend</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Friends of {{user.username}}</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="friend in friends">
+                        <td>{{friend}}</td>
+                        <td><button ng-click="unFriend($index)">Unfriend</button></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- testing -->
+
+
+    <div class="row primaryContent">
+        <div class="col-xs-12">
+
+            <div class="row ">
+                <div class="col-sm-3 col-xs-6">
+                    <div class="friendPhotoWrapper">
+                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
+                        <p class="text-center">John</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="friendPhotoWrapper">
+                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
+                        <p class="text-center">Lee</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="friendPhotoWrapper">
+                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
+                        <p class="text-center">Peter</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="friendPhotoWrapper">
+                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
+                        <p class="text-center">Amy</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="friendPhotoWrapper">
+                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
+                        <p class="text-center">Amy</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

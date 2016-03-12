@@ -1,5 +1,78 @@
 <div class="container contentWrapper">
 
+    <!-- testing -->
+    <div class="row primaryContent">
+        <div class="col-xs-12 noPadding">
+
+            <h3>Entities</h3>
+            <ul class="nav nav-tabs">
+                <li><a href="#/profile">Users</a></li>
+                <li class="active"><a href="#/">Favors</a></li>
+                <li><a href="#/favor">Reports</a></li>
+                <li><a href="#/favor">Comments</a></li>
+                <li><a href="#/friend">Friends</a></li>
+                <li><a href="#/community">Community</a></li>
+            </ul>
+            <br/>
+            <h3>Favors could only written by the coordinators</h3>
+            <br/>
+            <label class="control-label">Select a coordinator to show his/her favors</label>
+            <select ng-change="showFavors(coordinator._id)" ng-model="coordinator" ng-options="coordinator.username for coordinator in coordinators" class="form-control"></select>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>favor_id</th>
+                        <th>title</th>
+                        <th>coordinator</th>
+                        <th>date</th>
+                        <th>content</th>
+                        <th>tag</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{favor._id}}</td>
+                        <td><input ng-model="favor.title" class="form-control" type="text"></td>
+                        <td>{{coordinator.username}}</td>
+                        <td>{{favor.date}}</td>
+                        <td><input ng-model="favor.content" class="form-control" type="text" style="width:200px;"></td>
+                        <td>
+                            <select ng-model="favor.tag" class="form-control" style="width: 60px;">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td><button ng-click="createFavor(favor)">Add</button></td>
+                        <td><button ng-click="updateFavor(favor)">Update</button></td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="favor in favors | orderBy: 'date':true">
+                        <td>{{favor._id}}</td>
+                        <td>{{favor.title}}</td>
+                        <td>{{coordinator.username}}</td>
+                        <td>{{favor.date}}</td>
+                        <td>{{favor.content}}</td>
+                        <td>{{favor.tag}}</td>
+                        <td><button ng-click="editFavor($index)">Edit</button></td>
+                        <td><button ng-click="deleteFavor($index, favor._id)">Del</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- testing -->
+
+
+
     <div class="row primaryContent">
 
         <div class="col-xs-12 noPadding">
