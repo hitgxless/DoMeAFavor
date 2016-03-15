@@ -213,4 +213,14 @@ input.form-control, textarea.form-control {
     color: black;
 }
 
+/*-----------------testing style ----------------------*/
+.linkBtn {
+    background-color: transparent;
+    padding: 0;
+    color: #2b6589;
+}
+.linkBtn:hover {
+    text-decoration: underline;
+    color: #2b6589;
+}
 

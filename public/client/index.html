@@ -26,10 +26,16 @@
     <script src="config.js"></script>
     <script src="services/user.service.js"></script>
     <script src="services/favor.service.js"></script>
+    <script src="services/report.service.js"></script>
+    <script src="services/comment.service.js"></script>
+    <script src="services/map.service.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/home/favor.controller.js"></script>
     <script src="views/users/profile/profile.controller.js"></script>
     <script src="views/users/friend/friend.controller.js"></script>
+    <script src="views/community/community.controller.js"></script>
+    <script src="views/community/favor.controller.js"></script>
+    <script src="views/map/map.controller.js"></script>
 
 
 </head>
@@ -40,8 +46,9 @@
     <div ng-view></div>
 
 
-
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNagg6qKV8uOfPlIRRJ4RUhjeGx2S-WU" async defer>
+    </script>
     <!-- BootStrap JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- Bootstrap DatePicker -->

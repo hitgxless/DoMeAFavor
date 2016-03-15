@@ -8,27 +8,14 @@
             <ul class="nav nav-tabs">
                 <li><a href="#/profile">Users</a></li>
                 <li><a href="#/">Favors</a></li>
-                <li><a href="#/favor">Reports</a></li>
-                <li><a href="#/favor">Comments</a></li>
+                <li><a href="#/favor">Reports & Comments</a></li>
                 <li class="active"><a href="#/friend">Friends</a></li>
                 <li><a href="#/community">Community</a></li>
+                <li><a href="#/map">Maps API</a></li>
             </ul>
             <br/>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>All users</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr ng-repeat="user in users">
-                        <td>{{user.username}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <h3><span class="text-danger">Select</span> a User to Friend Another User</h3>
+            <br/>
 
             <br/>
             <div class="form-group">
@@ -37,17 +24,15 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Input username to add as friend:</label>
-                <input ng-model="friendUsername" class="form-control" type="text"><br/>
-                <button ng-click="addFriend(friendUsername)" class="btn btn-primary">Add as friend</button>
+                <label class="control-label">Select username to add as friend:</label>
+                <select ng-model="friend" ng-change="addFriend()" ng-options="user.username for user in users" class="form-control"></select>
             </div>
 
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Friends of {{user.username}}</th>
-                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -56,7 +41,6 @@
                     <tr ng-repeat="friend in friends">
                         <td>{{friend}}</td>
                         <td><button ng-click="unFriend($index)">Unfriend</button></td>
-                        <td></td>
                     </tr>
                     </tbody>
                 </table>

@@ -27,11 +27,21 @@
         $scope.editFavor = editFavor;
         $scope.updateFavor = updateFavor;
         $scope.createFavor = createFavor;
+        $scope.getUsernameById = getUsernameById;
+        $scope.getTagById = getTagById;
 
         $scope.coordinators = UserService.getAllCoordinators();
 
         function showFavors(userId) {
             $scope.favors = FavorService.getFavorsByUserId(userId);
+        }
+
+        function getUsernameById(userId) {
+            return UserService.getUsernameById(userId);
+        }
+
+        function getTagById(tagId) {
+            return FavorService.getTagById(tagId);
         }
 
         function deleteFavor(reverseIndex, favorId) {
@@ -68,19 +78,20 @@
 
         }
 
-        function createFavor(favor) {
-            if(selected == -1 && $scope.coordinator && $scope.favor) {
-                if($scope.favor.title && $scope.favor.content && $scope.favor.tag) {
+        function createFavor(newFavor) {
+
+            if(selected == -1 && $scope.coordinator && newFavor) {
+                if($scope.favor.title && $scope.favor.content && $scope.favor.tagId) {
                     var userId = $scope.coordinator._id;
 
-                    favor = {
+                    newFavor = {
                         title: $scope.favor.title,
                         content: $scope.favor.content,
-                        tag: $scope.favor.tag,
+                        tagId: $scope.favor.tagId,
                         coordinatorId: userId,
                         date: FavorService.getTodayDate()
                     };
-                    var favor = FavorService.createFavor(favor);
+                    var favor = FavorService.createFavor(newFavor);
                     $scope.favors.push(favor);
                     $scope.favor = null;
                     selected = -1;

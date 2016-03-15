@@ -1,5 +1,55 @@
 <div class="container contentWrapper">
 
+    <!-- testing -->
+    <div class="row primaryContent">
+        <div class="col-xs-12 noPadding">
+
+            <h3>Entities</h3>
+            <ul class="nav nav-tabs">
+                <li><a href="#/profile">Users</a></li>
+                <li><a href="#/">Favors</a></li>
+                <li><a href="#/favor">Reports & Comments</a></li>
+                <li><a href="#/friend">Friends</a></li>
+                <li class="active"><a href="#/community">Community</a></li>
+                <li><a href="#/map">Maps API</a></li>
+            </ul>
+            <br/>
+            <h3><span class="text-danger">Display</span> All Favors Created by the Coordinators</h3>
+            <br/>
+            <label class="control-label">Select a category to show related favors</label>
+            <select ng-change="showFavors(tag._id)" ng-model="tag" ng-options="tag.title for tag in tags" class="form-control"></select>
+            <br/>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>favor_id</th>
+                        <th>title</th>
+                        <th>coordinator</th>
+                        <th>date</th>
+                        <th>content</th>
+                        <th>category</th>
+                    </tr>
+                   </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="favor in favors | orderBy: 'date':true">
+                        <td>{{favor._id}}</td>
+                        <td><button ng-click="favorDetail(favor._id)" class="btn linkBtn">{{favor.title}}</button></td>
+                        <td>{{getUsernameById(favor.coordinatorId)}}</td>
+                        <td>{{favor.date}}</td>
+                        <td>{{favor.content}}</td>
+                        <td>{{getTagById(favor.tagId)}}</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- testing -->
+
 
     <div class="row primaryContent">
         <div class="col-xs-12 noPadding">

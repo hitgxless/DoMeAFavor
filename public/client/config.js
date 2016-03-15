@@ -29,14 +29,20 @@
                 .when("/mail", {
                     templateUrl: "views/users/mail/mail.view.html"
                 })
-                .when("/community/favors", {
-                    templateUrl: "views/community/favors.view.html"
+                .when("/community", {
+                    templateUrl: "views/community/community.view.html",
+                    controller: "CommunityController"
                 })
                 .when("/community/favor", {
-                    templateUrl: "views/community/favor.view.html"
+                    templateUrl: "views/community/favor.view.html",
+                    controller: "CommunityFavorController"
                 })
                 .when("/demo", {
                     templateUrl: "views/demo/demo.view.html"
+                })
+                .when("/map", {
+                    templateUrl: "views/map/map.view.html",
+                    controller: "MapController"
                 })
                 .otherwise({
                     redirectTo: "/"

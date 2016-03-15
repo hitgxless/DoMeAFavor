@@ -13,16 +13,19 @@
 
         function showFriends(userId) {
             $scope.friends = UserService.getFriendsById(userId);
+            $scope.friend = null;
         }
 
-        function addFriend(friendUsername) {
-            var friendId = UserService.getIdByUsername(friendUsername);
-            if(friendId != null && $scope.user != null) {
 
-                var isFriend = UserService.isFriend($scope.user._id, friendId);
-                if(!isFriend) {
-                    $scope.friends.push(friendUsername);
-                    UserService.addFriend($scope.user._id, friendId);
+        function addFriend() {
+            if($scope.user && $scope.friend) {
+                var userId = $scope.user._id;
+                var friendId = $scope.friend._id;
+                var isFriend = UserService.isFriend(userId, friendId);
+
+                if(userId != friendId && !isFriend) {
+                    $scope.friends.push($scope.friend.username);
+                    UserService.addFriend(userId, friendId);
                 }
             }
         }
