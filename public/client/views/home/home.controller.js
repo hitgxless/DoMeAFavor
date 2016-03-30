@@ -4,102 +4,101 @@
         .module("DoMeAFavorApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, FavorService, UserService) {
+    function HomeController($scope, $routeParams, FavorService, UserService, MapService) {
 
+        var currentUser = UserService.getCurrentUser();
+        $scope.viewedUserId = $routeParams.userId;
+
+        UserService.getUserById($scope.viewedUserId)
+            .then(function (response) {
+                $scope.viewedUser = response;
+            });
+
+
+        $scope.isFriend = true;
+
+        //initialize to display favors based on users' identities
+        if(currentUser) {
+            //if user logs in
+            var userId = currentUser._id;
+            //whether view user is logged in user
+            if(userId == $scope.viewedUserId) {
+                $scope.isCoordinator = !currentUser.volunteer;
+            } else {
+                $scope.isCoordinator = false;
+                UserService.isFriend(userId, $scope.viewedUserId)
+                    .then(function (response) {
+                        if(!response) {
+                            $scope.isFriend = false;
+                        }
+                    });
+            }
+        } else {
+            //if no user logs in
+            $scope.isCoordinator = false;
+        }
+
+        //display all favors based on userId
+        FavorService.getFavorsByUserId($scope.viewedUserId)
+            .then(function (response) {
+                $scope.favors = response;
+            });
+
+        //add new favor by coordinator
         $scope.newPost = false;
         $scope.showNewPost = showNewPost;
-        $scope.notShowNewPost = notShowNewPost;
+        $scope.createFavor = createFavor;
+        $scope.getLiteralDate = getLiteralDate;
+        $scope.addFriend = addFriend;
+
 
         function showNewPost() {
-            $scope.newPost = true;
-        }
-
-        function notShowNewPost() {
-            $scope.newPost = false;
-        }
-
-        //demo code
-
-        var selected = -1;
-
-        $scope.showFavors = showFavors;
-        $scope.deleteFavor = deleteFavor;
-        $scope.editFavor = editFavor;
-        $scope.updateFavor = updateFavor;
-        $scope.createFavor = createFavor;
-        $scope.getUsernameById = getUsernameById;
-        $scope.getTagById = getTagById;
-
-        $scope.coordinators = UserService.getAllCoordinators();
-
-        function showFavors(userId) {
-            $scope.favors = FavorService.getFavorsByUserId(userId);
-        }
-
-        function getUsernameById(userId) {
-            return UserService.getUsernameById(userId);
-        }
-
-        function getTagById(tagId) {
-            return FavorService.getTagById(tagId);
-        }
-
-        function deleteFavor(reverseIndex, favorId) {
-            var length = $scope.favors.length;
-            var index = length - reverseIndex - 1;
-            $scope.favors.splice(index, 1);
-            FavorService.deleteFavorById(favorId);
-            if(reverseIndex < selected) {
-                selected--;
-            } else if(reverseIndex == selected) {
-                selected = -1;
-                $scope.favor = null;
-            }
-        }
-
-        function editFavor(reverseIndex) {
-            selected = reverseIndex;
-            var index = $scope.favors.length - reverseIndex - 1;
-            $scope.favor = angular.copy($scope.favors[index]);
-        }
-
-        function updateFavor(favor) {
-
-            if(selected != -1) {
-                if(favor.title && favor.content) {
-                    var index = $scope.favors.length - selected - 1;
-                    $scope.favors[index] = favor;
-                    FavorService.updateFavorById(favor);
-                    $scope.favor = null;
-                    selected = -1;
-
-                }
-            }
-
+            $scope.newPost = !$scope.newPost;
+            $scope.newFavor = null;
         }
 
         function createFavor(newFavor) {
-
-            if(selected == -1 && $scope.coordinator && newFavor) {
-                if($scope.favor.title && $scope.favor.content && $scope.favor.tagId) {
-                    var userId = $scope.coordinator._id;
-
-                    newFavor = {
-                        title: $scope.favor.title,
-                        content: $scope.favor.content,
-                        tagId: $scope.favor.tagId,
-                        coordinatorId: userId,
-                        date: FavorService.getTodayDate()
-                    };
-                    var favor = FavorService.createFavor(newFavor);
-                    $scope.favors.push(favor);
-                    $scope.favor = null;
-                    selected = -1;
+            if(newFavor) {
+                if(newFavor.title && newFavor.content && newFavor.tagId && newFavor.address) {
+                    MapService.getPosition(newFavor.address)
+                        .then(function (response) {
+                            var favor = {
+                                title: newFavor.title,
+                                content: newFavor.content,
+                                tagId: newFavor.tagId,
+                                coordinatorId: userId,
+                                coordinator: currentUser.username,
+                                date: new Date().toString(),
+                                position: response
+                            };
+                            FavorService.createFavor(favor)
+                                .then(function (response) {
+                                    $scope.favors.unshift(response);
+                                    $scope.newPost = false;
+                                });
+                        });
                 }
-
             }
+
         }
 
+
+        function getLiteralDate(dateString) {
+            var date = new Date(dateString);
+            var dateOri = date.toDateString();
+            var dateLiteral = dateOri.substring(4, 7) + ". " + date.getDate() + ", " + date.getFullYear();
+            return dateLiteral;
+        }
+
+        function addFriend(friendId) {
+            UserService.addFriend(userId, friendId)
+                .then(function (response) {
+                    if(response) {
+                        console.log(response);
+                        $scope.isFriend = true;
+                    }
+                });
+        }
 
 
     }

@@ -7,7 +7,8 @@
     <title>Do Me a Favor</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- Include Bootstrap Datepicker -->
@@ -29,17 +30,20 @@
     <script src="services/report.service.js"></script>
     <script src="services/comment.service.js"></script>
     <script src="services/map.service.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/home/favor.controller.js"></script>
     <script src="views/users/profile/profile.controller.js"></script>
     <script src="views/users/friend/friend.controller.js"></script>
+    <script src="views/users/register/register.controller.js"></script>
+    <script src="views/users/login/login.controller.js"></script>
     <script src="views/community/community.controller.js"></script>
-    <script src="views/community/favor.controller.js"></script>
     <script src="views/map/map.controller.js"></script>
 
 
 </head>
-<body>
+<body ng-controller="MainController">
 
     <div ng-include="'views/header/header.view.html'"></div>
 

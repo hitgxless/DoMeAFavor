@@ -1,90 +1,22 @@
 <div class="container contentWrapper">
 
-    <!-- testing -->
-    <div class="row primaryContent">
-        <div class="col-xs-12 noPadding">
-
-            <h3>Entities</h3>
-            <ul class="nav nav-tabs">
-                <li><a href="#/profile">Users</a></li>
-                <li><a href="#/">Favors</a></li>
-                <li><a href="#/favor">Reports & Comments</a></li>
-                <li class="active"><a href="#/friend">Friends</a></li>
-                <li><a href="#/community">Community</a></li>
-                <li><a href="#/map">Maps API</a></li>
-            </ul>
-            <br/>
-            <h3><span class="text-danger">Select</span> a User to Friend Another User</h3>
-            <br/>
-
-            <br/>
-            <div class="form-group">
-                <label class="control-label">Select a user to display his/her friends:</label>
-                <select ng-model="user" ng-change="showFriends(user._id)" ng-options="user.username for user in users" class="form-control"></select>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label">Select username to add as friend:</label>
-                <select ng-model="friend" ng-change="addFriend()" ng-options="user.username for user in users" class="form-control"></select>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Friends of {{user.username}}</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr ng-repeat="friend in friends">
-                        <td>{{friend}}</td>
-                        <td><button ng-click="unFriend($index)">Unfriend</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-    <!-- testing -->
-
-
     <div class="row primaryContent">
         <div class="col-xs-12">
 
-            <div class="row ">
-                <div class="col-sm-3 col-xs-6">
+            <div class="row">
+                <div ng-show="hasFriend">
+                    <span class="lead">You have no friends now..</span>
+                </div>
+                <div ng-repeat="friend in friends" class="col-sm-4 col-xs-6">
                     <div class="friendPhotoWrapper">
                         <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
-                        <p class="text-center">John</p>
+                        <p class="text-center text-info friendPhotoText">
+                            <a href="#/{{friend.friendId}}/favors">{{friend.friend}}</a>
+                        </p>
+                        <span ng-show="hasAccess" ng-click="unFriend(friend, $index)" class="glyphicon glyphicon-remove-circle"></span>
                     </div>
                 </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="friendPhotoWrapper">
-                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
-                        <p class="text-center">Lee</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="friendPhotoWrapper">
-                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
-                        <p class="text-center">Peter</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="friendPhotoWrapper">
-                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
-                        <p class="text-center">Amy</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="friendPhotoWrapper">
-                        <img src="./images/profilePhoto.png" class="friendPhoto" alt="profile photo">
-                        <p class="text-center">Amy</p>
-                    </div>
-                </div>
+
             </div>
 
         </div>

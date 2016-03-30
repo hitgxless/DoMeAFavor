@@ -4,33 +4,32 @@
         .module("DoMeAFavorApp")
         .controller("CommunityController", CommunityController);
 
-    function CommunityController($scope, $location, FavorService, UserService) {
+    function CommunityController($scope, FavorService) {
 
         $scope.showFavors = showFavors;
-        $scope.getUsernameById = getUsernameById;
-        $scope.getTagById = getTagById;
-        $scope.favorDetail = favorDetail;
+        $scope.getLiteralDate = getLiteralDate;
 
-        $scope.tags = FavorService.getAllTags();
-
+        $scope.categoryChosen = 0;
+        FavorService.getFavorsByTagId(0)
+            .then(function (response) {
+                $scope.favors = response;
+            });
 
         function showFavors(tagId) {
-            $scope.favors = FavorService.getFavorsByTagId(tagId);
+            FavorService.getFavorsByTagId(tagId)
+                .then(function (response) {
+                    $scope.favors = response;
+                    $scope.categoryChosen = tagId;
+
+                });
         }
 
-        function getUsernameById(userId) {
-            return UserService.getUsernameById(userId);
+        function getLiteralDate(dateString) {
+            var date = new Date(dateString);
+            var dateOri = date.toDateString();
+            var dateLiteral = dateOri.substring(4, 7) + ". " + date.getDate() + ", " + date.getFullYear();
+            return dateLiteral;
         }
-
-        function getTagById(tagId) {
-            return FavorService.getTagById(tagId);
-        }
-
-        function favorDetail(favorId) {
-            FavorService.setFavorId(favorId);
-            $location.url("/community/favor");
-        }
-
     }
 
 

@@ -4,26 +4,21 @@
         .module("DoMeAFavorApp")
         .factory("MapService", MapService);
 
-    function MapService($http, $q) {
+
+    function MapService($q, $http) {
 
         var api = {
-            getPosition: getPosition
+            getPosition: getPosition,
         };
 
         return api;
 
-        var url = "https://maps.googleapis.com/maps/api/geocode/";
-        var key = "AIzaSyCX3hgR8pQ1Sq6iPwmGeAhx_T7bMMWJdZ8";
-
-        function getPosition(addresss) {
-
+        function getPosition(address) {
             var deferred = $q.defer();
-
-            $http.json(url + "json?address=" + "1600+Amphitheatre+Parkway,+Mountain+View,+CA")
+            $http.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + address)
                 .success(function (response) {
-                    deferred.resolve(response);
+                    deferred.resolve(response.results[0].geometry.location);
                 });
-
             return deferred.promise;
         }
 

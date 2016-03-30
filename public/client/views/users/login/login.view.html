@@ -6,16 +6,22 @@
             <br />
             <form novalidate>
 
-                <div class="form-group">
-                    <input type="type" class="form-control" id="loginUsername" placeholder="Username" required>
+                <div class="form-group has-feedback">
+                    <input ng-model="username" ng-change="checkUsername(username)" type="text" class="form-control" id="loginUsername" placeholder="Username" required>
+                    <span ng-class="{'glyphicon-warning-sign':usernameWarning}"
+                          class="glyphicon form-control-feedback"></span>
+                    <span class="errorMessage">{{usernameMessage}}</span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <input ng-model="password" ng-change="checkPassword(password)" type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                    <span ng-class="{'glyphicon-warning-sign':passwordWarning}"
+                          class="glyphicon form-control-feedback"></span>
+                    <span class="errorMessage">{{passwordMessage}}</span>
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" class="form-control btn submitBtn" value="Login">
+                    <input ng-click="login(username, password)" type="submit" class="form-control btn submitBtn" value="Login">
                 </div>
             </form>
         </div>

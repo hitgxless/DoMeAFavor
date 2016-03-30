@@ -1,85 +1,10 @@
 <div class="container contentWrapper">
 
-    <!-- testing -->
-    <div class="row primaryContent">
-        <div class="col-xs-12 noPadding">
-
-            <h3>Entities</h3>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#/profile">Users</a></li>
-                <li><a href="#/">Favors</a></li>
-                <li><a href="#/favor">Reports & Comments</a></li>
-                <li><a href="#/friend">Friends</a></li>
-                <li><a href="#/community">Community</a></li>
-                <li><a href="#/map">Maps API</a></li>
-            </ul>
-            <br/>
-            <h3><span class="text-danger">CRUD</span> Operations for All Users</h3>
-            <br/>
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>_id</th>
-                        <th>username</th>
-                        <th>password</th>
-                        <th>firstname</th>
-                        <th>lastname</th>
-                        <th>dob</th>
-                        <th>city</th>
-                        <th>phone</th>
-                        <th>email</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input ng-model="user.username" class="form-control" type="text"></td>
-                        <td><input ng-model="user.password" class="form-control" type="password"></td>
-                        <td><input ng-model="user.firstName" class="form-control" type="text"></td>
-                        <td><input ng-model="user.lastName" class="form-control" type="text"></td>
-                        <td>
-                            <div class="form-group date">
-                                <div date-picker class="input-group input-append date datePicker">
-                                    <input ng-model="user.dob" type="text" class="form-control" name="date">
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><input ng-model="user.city" class="form-control" type="text"></td>
-                        <td><input ng-model="user.phone" class="form-control" type="tel"></td>
-                        <td><input ng-model="user.email" class="form-control" type="email"></td>
-                        <td><button ng-click="createUser()">Add</button></td>
-                        <td><button ng-click="updateUser()">Update</button></td>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr ng-repeat="user in users">
-                        <td>{{user._id}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.password}}</td>
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.lastName}}</td>
-                        <td>{{user.dob}}</td>
-                        <td>{{user.city}}</td>
-                        <td>{{user.phone}}</td>
-                        <td>{{user.email}}</td>
-                        <td><button ng-click="editUser($index)">Edit</button></td>
-                        <td><button ng-click="deleteUser($index, user._id)">Del</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-    <!-- testing -->
-
+   <!-- display profile -->
     <div class="row primaryContent">
         <div class="col-xs-12">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-4">
+                <div class="col-sm-12 text-center">
                     <h3>Profile</h3>
                 </div>
             </div>
@@ -88,64 +13,89 @@
                     <div class="profilePhotoWrapper">
                         <img src="./images/profilePhoto.png" id="profilePhoto" alt="profile photo">
                         <br />
-                        <button class="profilePhotoBtn">change</button>
+                        <button ng-show="hasAccess" class="profilePhotoBtn">change</button>
                     </div>
                 </div>
 
-                <div class="col-sm-7">
+                <div class="col-sm-6 col-sm-offset-1">
                     <form class="form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="profileUsername">Username:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileUsername" placeholder="Username" disabled>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <span class="successMessage">{{updateMessage}}</span>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label" for="profileUsername">Username:</label>
+                            <div class="col-sm-9">
+                                <input ng-show="hasAccess"  ng-model="currentUser.username" type="text" class="form-control"
+                                       id="profileUsername" placeholder="Username" disabled>
+                                <span ng-show="!hasAccess" class="form-control profileText">{{currentUser.username}}</span>
+                            </div>
+                        </div>
+                        <div ng-show="hasAccess" class="form-group has-feedback">
                             <label class="col-sm-3 control-label" for="profilePassword">Password:</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="profilePassword" placeholder="Password">
+                                <input ng-show="hasAccess" ng-model="currentUser.password" ng-change="checkPassword(currentUser.password)"
+                                       type="password" class="form-control" id="profilePassword" placeholder="Password" required>
+                                <span ng-class="{'glyphicon-warning-sign':passwordWarning}"
+                                      class="glyphicon form-control-feedback"></span>
+                                <span class="errorMessage">{{passwordMessage}}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="profileFName">First Name:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileFName" placeholder="First Name">
+                                <input ng-show="hasAccess" ng-model="currentUser.firstName" type="text" class="form-control" id="profileFName" placeholder="First Name">
+                                <span ng-show="!hasAccess" class="form-control profileText">{{currentUser.firstName}}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="profileLName">Last Name:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileLName" placeholder="Last Name">
+                                <input ng-show="hasAccess" ng-model="currentUser.lastName" type="text" class="form-control" id="profileLName" placeholder="Last Name">
+                                <span ng-show="!hasAccess" class="form-control profileText">{{currentUser.lastName}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div ng-show="hasAccess" class="form-group">
                             <label class="col-sm-3 control-label" for="profileDOB">DOB:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileDOB" placeholder="Date of Birth">
+                                <input ng-model="currentUser.dob" type="text" class="form-control" id="profileDOB" placeholder="Date of Birth">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="profileCity">City:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileCity" placeholder="City">
+                                <input ng-show="hasAccess" ng-model="currentUser.city" type="text" class="form-control" id="profileCity" placeholder="City">
+                                <span ng-show="!hasAccess" class="form-control profileText">{{currentUser.city}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div ng-show="hasAccess" class="form-group">
                             <label class="col-sm-3 control-label" for="profilePhone">Phone:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profilePhone" placeholder="Phone">
+                                <input ng-model="currentUser.phone" type="text" class="form-control" id="profilePhone" placeholder="Phone">
+                            </div>
+                        </div>
+                        <div ng-show="hasAccess" class="form-group has-feedback">
+                            <label class="col-sm-3 control-label" for="profileEmail">Email:</label>
+                            <div class="col-sm-9">
+                                <input ng-model="currentUser.email" ng-change="checkEmail(currentUser.email)"
+                                       type="email" class="form-control" id="profileEmail" placeholder="Email" required>
+                                <span ng-class="{'glyphicon-warning-sign':emailWarning}"
+                                      class="glyphicon form-control-feedback"></span>
+                                <span class="errorMessage">{{emailMessage}}</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="profileEmail">Email:</label>
+                            <label class="col-sm-3 control-label">Description:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="profileEmail" placeholder="Email">
+                                <textarea ng-show="hasAccess" ng-model="currentUser.description" class="form-control" rows="3" placeholder="Description"></textarea>
+                                <span ng-show="!hasAccess" class="form-control profileText">{{currentUser.description}}</span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div ng-show="hasAccess" class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <input type="submit" class="form-control btn submitBtn" value="Update">
+                                <input ng-click="updateProfile(currentUser)" type="submit" class="form-control btn submitBtn" value="Update">
                             </div>
                         </div>
 

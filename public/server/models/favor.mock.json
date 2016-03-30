@@ -1,0 +1,13 @@
+[{"_id":1111, "title":"favor_aliceC_1",  "tagId":"1", "date":"Wed Mar 2 2016 11:51:35 GMT-0400 (EDT)", "coordinatorId":111,
+  "coordinator":"aliceC", "position": {"lat": 42.348, "lng": -71.064},
+  "content":"Content 1. Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1."},
+  {"_id":2222, "title":"favor_aliceC_2",  "tagId":"1", "date":"Fri Mar 4 2016 12:01:35 GMT-0400 (EDT)", "coordinatorId":111,
+    "coordinator":"aliceC", "position": {"lat": 42.368, "lng": -71.063},
+    "content":"Content 2. Content 2.Content 2. Content 2. Content 2.Content 2. Content 2. Content 2.Content 2."},
+  {"_id":3333, "title":"favor_edC_1",  "tagId":"2", "date":"Mon Mar 7 2016 04:05:35 GMT-0400 (EDT)", "coordinatorId":555,
+    "coordinator":"edC", "position": {"lat": 42.348, "lng": -71.076},
+    "content":"Content 1. Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1.Content 1."},
+  {"_id":4444, "title":"favor_edC_2",  "tagId":"2", "date":"Sat Mar 12 2016 12:12:35 GMT-0400 (EDT)", "coordinatorId":555,
+    "coordinator":"edC", "position": {"lat": 42.378, "lng": -71.054},
+    "content":"Content 2. Content 2.Content 2. Content 2. Content 2.Content 2.Content 2. Content 2.Content 2."}
+]
