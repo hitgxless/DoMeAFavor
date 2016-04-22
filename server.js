@@ -27,7 +27,7 @@ var db = mongoose.connect(dbConnectionString);
 
 app.use(cookieParser());
 app.use(session({
-    secret: process.env.PASSPORT_SECRET,
+    secret: process.env.PASSPORT_SECRET || "secret",
     resave: true,
     saveUninitialized: true
 }));
