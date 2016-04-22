@@ -3,7 +3,7 @@
     <div class="row primaryContent">
         <div class="col-xs-12 noPadding">
             <div class="alert alert-info">
-                <h4>For Grading This Assignment (Project 3: Project Prototype)</h4>
+                <h4>For Grading This Assignment (Project 3: Project Prototype")</h4>
                 <p>Please either register or use registered user <b>{username: aliceC, password: alice}</b>
                     or <b>{username: bobV, password: bob}</b> to log in.
                 </p>
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div ng-repeat="favor in favors | orderBy:'favor.date':true" class="row primaryContent">
+    <div ng-repeat="favor in favors" class="row primaryContent">
         <div class="col-xs-12 noPadding">
             <h3>{{favor.title}} &nbsp;
                 <a href="#/{{favor.coordinatorId}}/favors/{{favor._id}}" class="btn tagBtn"></span> View</a>

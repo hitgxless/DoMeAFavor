@@ -311,4 +311,9 @@ i.addon {
     text-decoration: underline;
     color: #2b6589;
 }
-
+/*-----------------media query----------------------------------*/
+@media only screen and (max-width: 767px) {
+    .primaryContent {
+        padding: 20px 15px 25px;
+    }
+}
